@@ -1,0 +1,14 @@
+npx nest g module users
+npx nest g service users
+npx nest g module auth
+npx nest g controller auth
+npx nest g service auth
+npx nest g module patients
+npx nest g controller patients
+npx nest g service patients
+npx nest g module specialists
+npx nest g controller specialists
+npx nest g service specialists
+npx nest g module appointments
+npx nest g controller appointments
+npx nest g service appointments

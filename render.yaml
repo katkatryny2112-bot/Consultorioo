@@ -1,0 +1,55 @@
+services:
+  # Backend
+  - type: web
+    name: consultorio-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:prod
+    envVars:
+      - key: NODE_VERSION
+        value: 18
+      - key: DATABASE_TYPE
+        value: postgres
+      - key: POSTGRES_HOST
+        fromDatabase:
+          name: consultorio-db
+          property: host
+      - key: POSTGRES_PORT
+        fromDatabase:
+          name: consultorio-db
+          property: port
+      - key: POSTGRES_USER
+        fromDatabase:
+          name: consultorio-db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          name: consultorio-db
+          property: password
+      - key: POSTGRES_DB
+        fromDatabase:
+          name: consultorio-db
+          property: name
+      - key: JWT_SECRET
+        generateValue: true
+
+  # Frontend
+  - type: web
+    name: consultorio-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: consultorio-backend
+          property: host
+
+databases:
+  - name: consultorio-db
+    databaseName: consultorio_db
+    user: postgres
+    plan: free
