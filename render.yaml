@@ -30,7 +30,7 @@ services:
       - key: POSTGRES_DB
         fromDatabase:
           name: consultorio-db
-          property: name
+          property: database
       - key: JWT_SECRET
         generateValue: true
 
@@ -51,5 +51,4 @@ services:
 databases:
   - name: consultorio-db
     databaseName: consultorio_db
-    user: postgres
     plan: free
